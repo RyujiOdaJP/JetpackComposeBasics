@@ -3,6 +3,9 @@ package com.example.jetpackcomposebasics
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -54,7 +57,13 @@ fun Greetings(names: List<String> = List(1000) { "$it" }) {
 @Composable
 fun Greeting(name: String) {
     var expanded by remember { mutableStateOf(false) }
-    val extraPadding = if (expanded) 48.dp else 0.dp
+    val extraPadding by animateDpAsState(
+        targetValue = if (expanded) 48.dp else 0.dp,
+        animationSpec = spring(
+            Spring.DampingRatioMediumBouncy,
+            Spring.StiffnessLow
+        )
+    )
     Surface(
         color = MaterialTheme.colors.primary,
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
