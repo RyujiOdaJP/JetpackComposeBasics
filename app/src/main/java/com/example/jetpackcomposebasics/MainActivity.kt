@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,7 +31,7 @@ val names = listOf("Android", "Compose")
 @Composable
 fun MyApp(names: List<String>) {
     // 状態をホイストします。ホイストは、状態にアクセスする必要がある共通の祖先に状態を移動
-    val shouldShowOnboarding = remember { mutableStateOf(true) }
+    val shouldShowOnboarding = rememberSaveable { mutableStateOf(true) }
 
     // A surface container using the 'background' color from the theme
     Surface(color = MaterialTheme.colors.background) {
